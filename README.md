@@ -1,4 +1,5 @@
-<h1 align="center">Sirkle</h1>
+<h1 align="center">Sirkle Ask</h1>
+<h3 align="center">/ˈsɜː.kə/</h3>
 <p align="center">
   <strong>Online Real-Time Polling System</strong>
 </p>
@@ -16,7 +17,7 @@
 
 ## About
 
-Sirkle (/ˈsɜː.kəl/) is an online real-time polling system designed to simplify the process of creating and conducting polls. Whether you need to gather opinions, make decisions, or conduct surveys, Sirkle has got you covered. With Sirkle, you can create both public and private polls, invite candidates to participate, and see live results in real time.
+Sirkle (/ˈsɜː.kəl/) Ask is an online real-time polling system designed to simplify the process of creating and conducting polls. Whether you need to gather opinions, make decisions, or conduct surveys, Sirkle has got you covered. With Sirkle, you can create both public and private polls, invite candidates to participate, and see live results in real time.
 
 ![Sirkle Demo](sirkle-demo.gif)
 
