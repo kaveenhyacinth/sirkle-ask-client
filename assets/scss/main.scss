@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --eire-black: #181818;
+  --emerald: #4CD980;
+  --silver: #C2C2C2;
+  --doge-blue: #4098FD;
+  --white: #FFFFFF;
+
+  --error: #E2363F;
+  --success: #5CD689;
+  --warning: #EDB95E;
+}
+
+*, html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  color: var(--eire-black);
+}
