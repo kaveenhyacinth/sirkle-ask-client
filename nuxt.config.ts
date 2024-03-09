@@ -4,7 +4,8 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['~/assets/scss/main.scss', '~/assets/scss/_typography.scss'],
   modules: [
-    '@vueuse/nuxt'
+    '@vueuse/nuxt',
+    'nuxt-icons'
   ],
   postcss: {
     plugins: {

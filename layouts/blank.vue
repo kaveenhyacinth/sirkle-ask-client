@@ -1,11 +1,10 @@
 <script lang="ts" setup>
-
 </script>
 
 <template>
-  <div>
-    <!--    <h1 class="text-xl font-bold">About</h1>-->
-  </div>
+  <main class="h-screen flex flex-col">
+    <slot />
+  </main>
 </template>
 
 <style scoped>
