@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import MobileSidebar from '~/components/Sidebar/MobileSidebar.vue'
 </script>
 
 <template>
@@ -9,9 +10,7 @@
     <main class="flex-1">
       <slot />
     </main>
-    <footer>
-      <BottombarMobile />
-    </footer>
+    <MobileSidebar />
   </div>
 </template>
 

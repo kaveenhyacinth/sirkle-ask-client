@@ -5,7 +5,8 @@ export default defineNuxtConfig({
   css: ['~/assets/scss/main.scss', '~/assets/scss/_typography.scss'],
   modules: [
     '@vueuse/nuxt',
-    'nuxt-icons'
+    'nuxt-icons',
+    'unplugin-icons/nuxt'
   ],
   postcss: {
     plugins: {

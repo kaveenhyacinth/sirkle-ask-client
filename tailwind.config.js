@@ -9,15 +9,6 @@ export default {
     './error.vue'
   ],
   theme: {
-    colors: {
-      'eire-black': 'var(--eire-black)',
-      emerald: 'var(--emerald)',
-      silver: 'var(--silver)',
-      white: 'var(--white)',
-      error: 'var(--error)',
-      success: 'var(--success)',
-      warning: 'var(--warning)'
-    },
     fontSize: {
       xs: '12px',
       sm: '14px',
@@ -29,7 +20,17 @@ export default {
       '4xl': '36px',
       '5xl': '48px'
     },
-    extend: {}
+    extend: {
+      colors: {
+        'eire-black': 'var(--eire-black)',
+        emerald: 'var(--emerald)',
+        silver: 'var(--silver)',
+        white: 'var(--white)',
+        error: 'var(--error)',
+        success: 'var(--success)',
+        warning: 'var(--warning)'
+      }
+    }
   },
   plugins: []
 }
