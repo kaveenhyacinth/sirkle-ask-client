@@ -28,34 +28,30 @@ const handleOnToggleSidebar = () => {
 </script>
 
 <template>
-  <aside>
-    <div v-show="isSidebarOpen" class="fixed inset-0 bg-black bg-opacity-20 z-50" @click="handleOnToggleSidebar" />
-    <div v-show="isSidebarOpen" class="fixed top-0 left-0 w-3/4 h-full bg-white z-50 rounded-tr-2xl rounded-br-2xl">
-      <div class="flex justify-between items-center py-3 px-4 gap-2">
-        <nuxt-link to="/">
-          <h1 class="text-xl font-bold">
-            Sirkl<span class="text-emerald">Ask</span>
-          </h1>
-        </nuxt-link>
-        <button @click="handleOnToggleSidebar">
-          <mdi-close class="w-6 h-6" />
-        </button>
-      </div>
-      <nav class="px-4 mt-4">
-        <ul class="flex flex-col gap-2">
-          <SidebarItem
-            v-for="item in navigationSchema"
-            :key="item.pathName"
-            :path="item.path"
-            :path-name="item.pathName"
-            @toggle-sidebar="handleOnToggleSidebar"
-          />
-        </ul>
-      </nav>
+  <USlideover v-model="isSidebarOpen" class="w-3/5" side="left">
+    <div class="flex justify-between items-center py-3 px-4 gap-2">
+      <nuxt-link to="/">
+        <h1 class="text-xl font-bold">
+          Sirkl<span class="text-emerald">Ask</span>
+        </h1>
+      </nuxt-link>
+      <button @click="handleOnToggleSidebar">
+        <mdi-close class="w-6 h-6" />
+      </button>
     </div>
-  </aside>
+    <nav class="px-4 mt-4">
+      <ul class="flex flex-col gap-2">
+        <SidebarItem
+          v-for="item in navigationSchema"
+          :key="item.pathName"
+          :path="item.path"
+          :path-name="item.pathName"
+          @toggle-sidebar="handleOnToggleSidebar"
+        />
+      </ul>
+    </nav>
+  </USlideover>
 </template>
 
 <style scoped>
-
 </style>

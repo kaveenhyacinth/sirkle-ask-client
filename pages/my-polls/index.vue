@@ -9,7 +9,7 @@ const items = ref(Array(10))
 <template>
   <div class="w-full h-full pb-6 flex flex-col">
     <section>
-      <Breadcrumb :links="breadcrumbSchema['my-votes']" />
+      <Breadcrumb :links="breadcrumbSchema['my-polls']" />
     </section>
     <section>
       <div class="w-full flex justify-between gap-4 mt-4">
@@ -25,7 +25,7 @@ const items = ref(Array(10))
           :trailing="false"
           color="primary"
           icon="mdi:plus"
-          label="Find more"
+          label="Create poll"
           size="md"
           variant="solid"
         />

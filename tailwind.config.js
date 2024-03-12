@@ -22,6 +22,9 @@ export default {
     },
     extend: {
       colors: {
+        primary: {
+          DEFAULT: 'var(--emerald)'
+        },
         'eire-black': 'var(--eire-black)',
         emerald: 'var(--emerald)',
         silver: 'var(--silver)',
