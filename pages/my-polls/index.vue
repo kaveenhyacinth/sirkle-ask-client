@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { breadcrumbSchema } from '~/utils/navigation'
-import PollTile from '~/features/poll/PollTile.vue'
+import PollCard from '~/features/poll/PollCard.vue'
 
 const page = ref(1)
 const items = ref(Array(10))
@@ -33,7 +33,7 @@ const items = ref(Array(10))
     </section>
     <section class="flex-1">
       <div class="mt-6 flex flex-col gap-3">
-        <PollTile v-for="item in Array(8)" :key="item" />
+        <PollCard v-for="item in Array(8)" :key="item" />
       </div>
     </section>
     <section>
