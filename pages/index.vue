@@ -2,7 +2,12 @@
 
 import PollCard from '~/features/poll/PollCard.vue'
 
-const load = ref(true)
+const { data } = useAsyncData('poll:all', async () => {
+  const response = await useApi().pollModule.getPolls()
+  return {
+    polls: response
+  }
+})
 </script>
 
 <template>
@@ -36,11 +41,16 @@ const load = ref(true)
     </section>
     <section class="flex-1">
       <div class="mt-6 flex flex-col gap-3">
-        <PollCard v-for="item in Array(8)" :key="item" />
+        <PollCard
+          v-for="poll in data?.polls"
+          :key="poll?.id"
+          :description="poll?.description"
+          :question="poll?.question"
+        />
       </div>
     </section>
     <section>
-      <NuxtLoadingIndicator v-model="load" />
+      <NuxtLoadingIndicator />
     </section>
   </div>
 </template>

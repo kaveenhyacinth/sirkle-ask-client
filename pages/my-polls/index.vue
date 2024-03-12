@@ -2,8 +2,14 @@
 import { breadcrumbSchema } from '~/utils/navigation'
 import PollCard from '~/features/poll/PollCard.vue'
 
+const { data } = useAsyncData('poll:all', async () => {
+  const response = await useApi().pollModule.getPolls()
+  return {
+    polls: response
+  }
+})
+
 const page = ref(1)
-const items = ref(Array(10))
 </script>
 
 <template>
@@ -33,16 +39,21 @@ const items = ref(Array(10))
     </section>
     <section class="flex-1">
       <div class="mt-6 flex flex-col gap-3">
-        <PollCard v-for="item in Array(8)" :key="item" />
+        <PollCard
+          v-for="poll in data?.polls"
+          :key="poll?.id"
+          :description="poll?.description"
+          :question="poll?.question"
+        />
       </div>
     </section>
     <section>
-      <div v-if="items.length" class="mt-6 flex justify-center">
+      <div v-if="data?.polls?.length" class="mt-6 flex justify-center">
         <UPagination
           v-model="page"
           :max="5"
           :page-count="5"
-          :total="items.length"
+          :total="data?.polls?.length"
           show-first
           show-last
           size="md"
