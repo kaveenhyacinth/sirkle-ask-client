@@ -7,7 +7,7 @@ import MobileSidebar from '~/components/Sidebar/MobileSidebar.vue'
     <nav>
       <Navbar />
     </nav>
-    <main class="flex-1">
+    <main class="flex-1 px-4">
       <slot />
     </main>
     <MobileSidebar />

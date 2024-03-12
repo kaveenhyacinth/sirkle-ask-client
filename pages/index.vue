@@ -2,10 +2,8 @@
 </script>
 
 <template>
-  <div class="w-full flex flex-col justify-center items-center">
-    <h1 class="text-xl font-bold">
-      Home
-    </h1>
+  <div class="w-full">
+    <ComingSoon />
   </div>
 </template>
 

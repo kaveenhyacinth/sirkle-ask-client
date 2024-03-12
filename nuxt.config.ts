@@ -6,12 +6,16 @@ export default defineNuxtConfig({
   modules: [
     '@vueuse/nuxt',
     'nuxt-icons',
-    'unplugin-icons/nuxt'
+    'unplugin-icons/nuxt',
+    '@nuxt/ui'
   ],
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {}
     }
+  },
+  colorMode: {
+    preference: 'light'
   }
 })
