@@ -17,5 +17,6 @@ watchEffect(() => {
   <NuxtLayout>
     <NuxtPage />
     <NotSupported v-if="!isMobile && isAppReady" />
+    <UNotifications />
   </NuxtLayout>
 </template>

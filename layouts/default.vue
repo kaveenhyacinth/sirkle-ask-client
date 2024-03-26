@@ -1,5 +1,8 @@
 <script lang="ts" setup>
 import MobileSidebar from '~/components/Sidebar/MobileSidebar.vue'
+import { useLayout } from '~/composables/useLayout'
+
+const { noSidebar } = useLayout()
 </script>
 
 <template>
@@ -10,7 +13,7 @@ import MobileSidebar from '~/components/Sidebar/MobileSidebar.vue'
     <main class="flex-1 px-4">
       <slot />
     </main>
-    <MobileSidebar />
+    <MobileSidebar v-if="!noSidebar" />
   </div>
 </template>
 
