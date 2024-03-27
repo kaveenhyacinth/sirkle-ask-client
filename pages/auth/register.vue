@@ -1,10 +1,14 @@
 <script lang="ts" setup>
 import { z } from 'zod'
 import type { FormError, FormSubmitEvent } from '#ui/types'
+import type { RegisterDto } from '~/types/api.types'
 
 definePageMeta({
-  noSidebar: true
+  noSidebar: true,
+  public: true
 })
+
+const { register } = useAuthStore()
 
 const schema = z.object({
   email: z.string().email('Invalid email address'),
@@ -26,8 +30,6 @@ const validate = (data: any): FormError[] => {
   return errors
 }
 
-const toast = useToast()
-
 const state = reactive({
   email: '',
   username: '',
@@ -35,12 +37,14 @@ const state = reactive({
   confirmPassword: ''
 })
 
-const onSubmit = (event: FormSubmitEvent<Schema>) => {
-  console.log('submit', event.data)
-  toast.add({
-    title: 'Registration successful',
-    description: 'You have successfully registered'
-  })
+const onSubmit = async (event: FormSubmitEvent<Schema>) => {
+  const registerObj: RegisterDto = {
+    email: event.data.email,
+    username: event.data.username,
+    password: event.data.password
+  }
+
+  await register(registerObj)
 }
 </script>
 

@@ -1,8 +1,10 @@
 import { type FetchOptions } from 'ofetch'
 import PollModule from '~/api/modules/poll'
+import AuthModule from '~/api/modules/auth'
 
 interface IApiInstance {
-	pollModule: PollModule
+  pollModule: PollModule
+  authModule: AuthModule
 }
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -13,7 +15,8 @@ export default defineNuxtPlugin((nuxtApp) => {
   const apiFetcher = $fetch.create(fetchOptions)
 
   const modules: IApiInstance = {
-    pollModule: new PollModule(apiFetcher)
+    pollModule: new PollModule(apiFetcher),
+    authModule: new AuthModule(apiFetcher)
   }
 
   return {

@@ -2,6 +2,7 @@
 import MdiClose from '~icons/mdi/close'
 
 const isSidebarOpen = useSidebar()
+const authStore = useAuthStore()
 
 const navigationSchema = [
   {
@@ -24,6 +25,11 @@ const navigationSchema = [
 
 const handleOnToggleSidebar = () => {
   isSidebarOpen.value = !isSidebarOpen.value
+}
+
+const handleOnLogout = () => {
+  authStore.logout()
+  handleOnToggleSidebar()
 }
 </script>
 
@@ -50,6 +56,24 @@ const handleOnToggleSidebar = () => {
         />
       </ul>
     </nav>
+    <div class="mt-auto p-2 pb-4">
+      <UButton
+        v-if="authStore.isAuthenticated"
+        block
+        color="gray"
+        icon="mdi:logout"
+        label="Logout"
+        @click="handleOnLogout"
+      />
+      <UButton
+        v-else
+        block
+        color="primary"
+        icon="mdi:login"
+        label="Login"
+        to="/auth/login"
+      />
+    </div>
   </USlideover>
 </template>
 

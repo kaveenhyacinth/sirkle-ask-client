@@ -2,6 +2,10 @@
 
 import PollCard from '~/features/poll/PollCard.vue'
 
+definePageMeta({
+  public: true
+})
+
 const { data } = useAsyncData('poll:all', async () => {
   const response = await useApi().pollModule.getPolls()
   return {

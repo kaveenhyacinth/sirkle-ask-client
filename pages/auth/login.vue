@@ -1,10 +1,14 @@
 <script lang="ts" setup>
 import { z } from 'zod'
 import type { FormSubmitEvent } from '#ui/types'
+import type { LoginDto } from '~/types/api.types'
 
 definePageMeta({
-  noSidebar: true
+  noSidebar: true,
+  public: true
 })
+
+const { login } = useAuthStore()
 
 const schema = z.object({
   email: z.string().email('Invalid email address'),
@@ -18,8 +22,13 @@ const state = reactive({
   password: ''
 })
 
-const onSubmit = (event: FormSubmitEvent<Schema>) => {
-  console.log('submit', event.data)
+const onSubmit = async (event: FormSubmitEvent<Schema>) => {
+  const loginDto: LoginDto = {
+    email: event.data.email,
+    password: event.data.password
+  }
+
+  await login(loginDto)
 }
 </script>
 

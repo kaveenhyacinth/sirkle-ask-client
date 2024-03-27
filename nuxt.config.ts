@@ -12,7 +12,8 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-icons',
     'unplugin-icons/nuxt',
-    '@nuxt/ui'
+    '@nuxt/ui',
+    '@pinia/nuxt'
   ],
   postcss: {
     plugins: {
