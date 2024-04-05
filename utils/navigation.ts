@@ -1,6 +1,6 @@
 import type { BreadcrumbLink } from '#ui/types'
 
-export type IPage = 'home' | 'my-polls' | 'my-votes' | 'settings'
+export type IPage = 'home' | 'my-polls' | 'create-poll' | 'my-votes' | 'settings'
 
 export const breadcrumbSchema: Record<IPage, BreadcrumbLink[]> = {
   home: [
@@ -14,5 +14,11 @@ export const breadcrumbSchema: Record<IPage, BreadcrumbLink[]> = {
   ],
   settings: [
     { label: 'Settings', to: '/settings', icon: 'mdi:cog' }
-  ]
+  ],
+  'create-poll': []
 }
+
+breadcrumbSchema['create-poll'] = [
+  ...breadcrumbSchema['my-polls'],
+  { label: 'Create Poll', to: '/create-poll' }
+]

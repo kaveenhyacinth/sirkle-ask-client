@@ -27,7 +27,7 @@ const { data } = useAsyncData('poll:all', async () => {
           icon="mdi:lightning-bolt"
           label="Create a poll"
           size="md"
-          to="/my-polls/create-poll"
+          to="/polls/new"
           variant="solid"
         />
       </div>

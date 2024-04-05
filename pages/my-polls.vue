@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { breadcrumbSchema } from '~/utils/navigation'
 import PollCard from '~/features/poll/PollCard.vue'
+
+const breadcrumb = useBreadcrumb('my-polls')
 
 const { data } = useAsyncData('poll:all', async () => {
   const response = await useApi().pollModule.getPolls()
@@ -10,16 +11,12 @@ const { data } = useAsyncData('poll:all', async () => {
 })
 
 const page = ref(1)
-
-onMounted(() => {
-  console.log('mounted', breadcrumbSchema['my-polls'])
-})
 </script>
 
 <template>
   <div class="w-full h-full pb-6 flex flex-col">
     <section>
-      <Breadcrumb :links="breadcrumbSchema['my-polls']" />
+      <Breadcrumb :links="breadcrumb" />
     </section>
     <section>
       <div class="w-full flex justify-between gap-4 mt-4">
@@ -37,7 +34,7 @@ onMounted(() => {
           icon="mdi:plus"
           label="Create poll"
           size="md"
-          to="/my-polls/create-poll"
+          to="/polls/new"
           variant="solid"
         />
       </div>
