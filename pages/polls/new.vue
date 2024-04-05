@@ -5,13 +5,13 @@ const links = ref(breadcrumbSchema['my-polls'])
 
 onMounted(() => {
   links.value.push({
-    label: 'Create Poll',
-    to: '/my-polls/create-poll'
+    label: 'Create Poll'
   })
 })
 
 onBeforeUnmount(() => {
-  links.value = []
+  links.value.pop()
+  breadcrumbSchema['my-polls'] = links.value
 })
 </script>
 

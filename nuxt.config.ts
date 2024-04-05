@@ -7,13 +7,15 @@ export default defineNuxtConfig({
       API_BASE_URL: process.env.API_BASE_URL
     }
   },
-  css: ['~/assets/scss/main.scss', '~/assets/scss/_typography.scss'],
   modules: [
     '@vueuse/nuxt',
     'nuxt-icons',
     'unplugin-icons/nuxt',
     '@nuxt/ui',
     '@pinia/nuxt'
+  ],
+  css: [
+    '~/assets/styles/main.scss'
   ],
   postcss: {
     plugins: {

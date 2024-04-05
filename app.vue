@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { REDIRECT_FROM_WHITELIST } from '#imports'
 
 const { width: screenWidth } = useWindowSize()
 const route = useRoute()

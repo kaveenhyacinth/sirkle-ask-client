@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { z } from 'zod'
 import type { FormSubmitEvent } from '#ui/types'
-import type { LoginDto } from '~/types/api.types'
+import type { LoginContract } from '~/types/api.types'
 
 definePageMeta({
   noSidebar: true,
@@ -23,7 +23,7 @@ const state = reactive({
 })
 
 const onSubmit = async (event: FormSubmitEvent<Schema>) => {
-  const loginDto: LoginDto = {
+  const loginDto: LoginContract = {
     email: event.data.email,
     password: event.data.password
   }

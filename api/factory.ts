@@ -1,5 +1,4 @@
 import { type $Fetch } from 'nitropack'
-import { STORAGE_KEYS } from '~/types/storage.types'
 
 class HttpFactory {
   private readonly $fetch: $Fetch
@@ -13,16 +12,15 @@ class HttpFactory {
    * URL
    **/
   async call<T> (method: 'GET' | 'POST' | 'PUT' | 'DELETE', url: string, data?: object, extras?: Record<string, any>): Promise<T> {
-    const accessToken = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN)
     return await this.$fetch(url, {
       method,
       body: data,
       ...extras,
-      ...(accessToken && !extras?.noAuth
+      ...(extras?.noAuth
         ? {
             headers: {
               ...extras?.headers,
-              Authorization: `Bearer ${accessToken}`
+              Authorization: undefined
             }
           }
         : {})

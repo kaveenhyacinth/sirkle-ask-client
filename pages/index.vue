@@ -9,7 +9,7 @@ definePageMeta({
 const { data } = useAsyncData('poll:all', async () => {
   const response = await useApi().pollModule.getPolls()
   return {
-    polls: response
+    polls: response.data
   }
 })
 </script>
@@ -27,6 +27,7 @@ const { data } = useAsyncData('poll:all', async () => {
           icon="mdi:lightning-bolt"
           label="Create a poll"
           size="md"
+          to="/my-polls/create-poll"
           variant="solid"
         />
       </div>
@@ -48,8 +49,11 @@ const { data } = useAsyncData('poll:all', async () => {
         <PollCard
           v-for="poll in data?.polls"
           :key="poll?.id"
+          :created-at="poll?.createdAt"
           :description="poll?.description"
           :question="poll?.question"
+          :votes="poll?.votes"
+          @click="() => $router.push(`/polls/${poll?._id}`)"
         />
       </div>
     </section>

@@ -10,7 +10,8 @@ export const useNotification = () => {
     toast.add({
       title: payload.title ?? 'Success!',
       description: payload.description,
-      color: 'green'
+      color: 'green',
+      timeout: 3000
     })
   }
 
@@ -18,7 +19,8 @@ export const useNotification = () => {
     toast.add({
       title: payload.title ?? 'Error!',
       description: payload.description,
-      color: 'red'
+      color: 'red',
+      timeout: 3000
     })
   }
 

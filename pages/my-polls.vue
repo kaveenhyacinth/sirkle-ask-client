@@ -10,6 +10,10 @@ const { data } = useAsyncData('poll:all', async () => {
 })
 
 const page = ref(1)
+
+onMounted(() => {
+  console.log('mounted', breadcrumbSchema['my-polls'])
+})
 </script>
 
 <template>
@@ -33,6 +37,7 @@ const page = ref(1)
           icon="mdi:plus"
           label="Create poll"
           size="md"
+          to="/my-polls/create-poll"
           variant="solid"
         />
       </div>

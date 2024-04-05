@@ -1,4 +1,4 @@
-import type { LoginDto, RegisterDto } from '~/types/api.types'
+import type { LoginContract, RegisterContract } from '~/types/api.types'
 import { STORAGE_KEYS } from '~/types/storage.types'
 
 export const useAuthStore = defineStore('sirkl/auth', () => {
@@ -19,7 +19,7 @@ export const useAuthStore = defineStore('sirkl/auth', () => {
     token.value = null
   }
 
-  const login = async (loginDto: LoginDto) => {
+  const login = async (loginDto: LoginContract) => {
     try {
       const res = await api.authModule.login(loginDto)
       isAuthenticated.value = true
@@ -32,7 +32,7 @@ export const useAuthStore = defineStore('sirkl/auth', () => {
     }
   }
 
-  const register = async (registerDto: RegisterDto) => {
+  const register = async (registerDto: RegisterContract) => {
     try {
       const res = await api.authModule.register(registerDto)
       isAuthenticated.value = true

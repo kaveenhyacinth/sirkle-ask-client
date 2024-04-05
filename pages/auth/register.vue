@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { z } from 'zod'
 import type { FormError, FormSubmitEvent } from '#ui/types'
-import type { RegisterDto } from '~/types/api.types'
+import type { RegisterContract } from '~/types/api.types'
 
 definePageMeta({
   noSidebar: true,
@@ -38,7 +38,7 @@ const state = reactive({
 })
 
 const onSubmit = async (event: FormSubmitEvent<Schema>) => {
-  const registerObj: RegisterDto = {
+  const registerObj: RegisterContract = {
     email: event.data.email,
     username: event.data.username,
     password: event.data.password
