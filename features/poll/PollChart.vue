@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 import type { IPoll } from '~/types/api.types'
 
-const props = defineProps<{ poll?: IPoll, selectedVote?: string, isExpired: boolean }>()
-const emits = defineEmits<{(e: 'update:selected-vote', optionId?: string): void}>()
+const props = defineProps<{ poll?: IPoll, selectedVote?: string, isExpired: boolean, myOption?: string }>()
 
 const sortedVoteOptions = computed(() => props?.poll?.options?.map(option => ({
   ...option,
@@ -15,33 +14,37 @@ const toPercentage = (votes: number = 0, totalVotes: number = 0): number => {
   }
   return Math.round((votes / totalVotes) * 100)
 }
-
-const onSelectVote = (optionId: string) => {
-  if (props.selectedVote === optionId) {
-    return emits('update:selected-vote', undefined)
-  }
-  emits('update:selected-vote', optionId)
-}
 </script>
 
 <template>
   <div
     v-for="(option, index) in sortedVoteOptions"
     :key="option._id"
-    :class="{'result__card--max': index === 0 && props?.poll?.votes !== 0, 'border-eire-black-600': selectedVote === option._id && !props.isExpired}"
-    class="result__card"
-    @click="() => onSelectVote(option._id)"
   >
-    <h2 class="font-semibold text-md">
-      {{ option.value }}
-    </h2>
-    <UProgress :value="option.percentage" size="lg" />
-    <div class="flex justify-between">
-      <p class="text-sm font-medium text-gray-500">
-        {{ pluralizeNumber(option.votes, 'vote') }}
-      </p>
-      <p class="text-sm font-medium text-gray-500">
-        {{ option.percentage }}%
+    <div
+      :class="{
+        'result__card--max': index === 0 && props?.poll?.votes !== 0,
+        'border-eire-black-600': selectedVote === option._id && !props.isExpired,
+        'result__card--my-vote': myOption === option._id
+      }"
+      class="result__card"
+    >
+      <h2 class="font-semibold text-md">
+        {{ option.value }}
+      </h2>
+      <UProgress :value="option.percentage" size="lg" />
+      <div class="flex justify-between">
+        <p class="text-sm font-medium text-gray-500">
+          {{ pluralizeNumber(option.votes, 'vote') }}
+        </p>
+        <p class="text-sm font-medium text-gray-500">
+          {{ option.percentage }}%
+        </p>
+      </div>
+    </div>
+    <div v-if="option._id === props.myOption" class="w-full bg-dodger-blue-500 rounded-b-xl relative -top-2 py-1">
+      <p class="w-full text-center text-sm text-white">
+        Voted
       </p>
     </div>
   </div>
@@ -61,6 +64,10 @@ const onSelectVote = (optionId: string) => {
     &:hover {
       @apply border-primary-600;
     }
+  }
+
+  &--my-vote {
+    @apply border-dodger-blue-500 mb-0;
   }
 }
 </style>

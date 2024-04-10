@@ -12,6 +12,10 @@ class PollModule extends HttpFactory {
     return await this.get(`${this.RESOURCE}/${id}`)
   }
 
+  async getPollsByUser (): Promise<IApiSuccessResponse<Omit<IPoll, 'options'>[]>> {
+    return await this.get(`${this.RESOURCE}/my`)
+  }
+
   async createPoll (payload: IPollContract): Promise<IApiSuccessResponse<IPoll>> {
     return await this.post(`${this.RESOURCE}`, payload)
   }

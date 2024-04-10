@@ -43,3 +43,13 @@ export interface IVoteContract {
   poll: string;
   option: string;
 }
+
+export interface IVote {
+  _id: string;
+  poll: IPoll
+}
+
+export interface IVoteResult extends ICommon {
+  poll: IPoll;
+  option: string;
+}

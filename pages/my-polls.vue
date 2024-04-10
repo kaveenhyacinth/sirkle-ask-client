@@ -3,14 +3,14 @@ import PollCard from '~/features/poll/PollCard.vue'
 
 const breadcrumb = useBreadcrumb('my-polls')
 
-const { data } = useAsyncData('poll:all', async () => {
-  const response = await useApi().pollModule.getPolls()
+const { data } = useAsyncData('poll:my', async () => {
+  const response = await useApi().pollModule.getPollsByUser()
   return {
-    polls: response
+    polls: response.data
   }
 })
 
-const page = ref(1)
+// const page = ref(1)
 </script>
 
 <template>
@@ -43,25 +43,28 @@ const page = ref(1)
       <div class="mt-6 flex flex-col gap-3">
         <PollCard
           v-for="poll in data?.polls"
-          :key="poll?.id"
+          :key="poll?._id"
+          :created-at="poll?.createdAt"
           :description="poll?.description"
           :question="poll?.question"
+          :votes="poll?.votes"
+          @click="() => $router.push(`/polls/${poll?._id}`)"
         />
       </div>
     </section>
-    <section>
-      <div v-if="data?.polls?.length" class="mt-6 flex justify-center">
-        <UPagination
-          v-model="page"
-          :max="5"
-          :page-count="5"
-          :total="data?.polls?.length"
-          show-first
-          show-last
-          size="md"
-        />
-      </div>
-    </section>
+    <!--    <section>-->
+    <!--      <div v-if="data?.polls?.length" class="mt-6 flex justify-center">-->
+    <!--        <UPagination-->
+    <!--          v-model="page"-->
+    <!--          :max="5"-->
+    <!--          :page-count="5"-->
+    <!--          :total="data?.polls?.length"-->
+    <!--          show-first-->
+    <!--          show-last-->
+    <!--          size="md"-->
+    <!--        />-->
+    <!--      </div>-->
+    <!--    </section>-->
   </div>
 </template>
 
