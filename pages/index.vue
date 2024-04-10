@@ -48,7 +48,7 @@ const { data } = useAsyncData('poll:all', async () => {
       <div class="mt-6 flex flex-col gap-3">
         <PollCard
           v-for="poll in data?.polls"
-          :key="poll?.id"
+          :key="poll?._id"
           :created-at="poll?.createdAt"
           :description="poll?.description"
           :question="poll?.question"

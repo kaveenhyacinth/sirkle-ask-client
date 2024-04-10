@@ -1,15 +1,15 @@
 <script lang="ts" setup>
 import type { IPoll } from '~/types/api.types'
 
-const props = defineProps<{ poll: IPoll, selectedVote: string }>()
+const props = defineProps<{ poll?: IPoll, selectedVote?: string }>()
 const emits = defineEmits<{(e: 'update:selected-vote', optionId?: string): void}>()
 
-const sortedVoteOptions = computed(() => props.poll.options?.map(option => ({
+const sortedVoteOptions = computed(() => props?.poll?.options?.map(option => ({
   ...option,
-  percentage: toPercentage(option.votes, props.poll.votes)
+  percentage: toPercentage(option.votes, props?.poll?.votes)
 }))?.sort((a, b) => b.votes - a.votes))
 
-const toPercentage = (votes: number, totalVotes: number): number => {
+const toPercentage = (votes: number = 0, totalVotes: number = 0): number => {
   return Math.round((votes / totalVotes) * 100)
 }
 

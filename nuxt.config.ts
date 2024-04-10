@@ -12,8 +12,14 @@ export default defineNuxtConfig({
     'nuxt-icons',
     'unplugin-icons/nuxt',
     '@nuxt/ui',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    'nuxt-lodash'
   ],
+  lodash: {
+    prefix: '_',
+    prefixSkip: ['is', 'can', 'has'],
+    exclude: ['map', 'filter']
+  },
   css: [
     '~/assets/styles/main.scss'
   ],

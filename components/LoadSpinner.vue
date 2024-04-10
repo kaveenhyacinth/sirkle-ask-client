@@ -1,6 +1,11 @@
 <template>
-  <div class="w-full h-full bg-transparent fixed top-0 left-0 z-50 flex justify-center items-center">
+  <div class="w-full h-full bg-white fixed top-0 left-0 z-50 flex flex-col justify-center items-center gap-4">
     <div class="spinner" />
+    <p class="text-xl text-gray-500">
+      <slot>
+        Loading...
+      </slot>
+    </p>
   </div>
 </template>
 

@@ -22,7 +22,7 @@ const createdAgo = useTimeAgo(new Date(props.createdAt))
         {{ question }}
       </h2>
       <h3 class="text-sm font-semibold">
-        {{ votes }} Vote/s
+        {{ pluralizeNumber(props.votes, 'Vote') }}
       </h3>
     </div>
     <div class="w-full flex justify-between items-end">

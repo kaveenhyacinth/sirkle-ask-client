@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import dayjs from 'dayjs'
 import PollChart from '~/features/poll/PollChart.vue'
 
 const route = useRoute()
@@ -60,13 +61,12 @@ const onSubmitVote = async (optionId?: string) => {
   }
 }
 
-const formatDate = (date: string | Date) => {
-  date = new Date(date)
-  return new Intl.DateTimeFormat('en-GB', {
-    year: 'numeric',
-    month: 'short',
-    day: '2-digit'
-  }).format(date).split(' ').join('-')
+const formatDate = (date?: string | Date) => {
+  const dateObj = dayjs(date)
+  if (!dateObj.isValid()) {
+    return
+  }
+  return dateObj.format('DD MMM YYYY')
 }
 
 watch(pollId, (newValue, oldValue) => {
@@ -80,8 +80,10 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <LoadSpinner v-if="shouldShowSpinner" />
-  <div v-else class="mt-2">
+  <div class="mt-2">
+    <LoadSpinner v-if="shouldShowSpinner">
+      Loading votes...
+    </LoadSpinner>
     <h1 class="font-semibold text-2xl text-eire-black mb-2">
       {{ data?.poll?.question }}
     </h1>
