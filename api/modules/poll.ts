@@ -1,5 +1,5 @@
 import HttpFactory from '../factory'
-import type { IApiSuccessResponse, IPoll } from '~/types/api.types'
+import type { IApiSuccessResponse, IPoll, IPollContract } from '~/types/api.types'
 
 class PollModule extends HttpFactory {
   private RESOURCE = '/polls'
@@ -10,6 +10,10 @@ class PollModule extends HttpFactory {
 
   async getPollById (id: string): Promise<IApiSuccessResponse<IPoll>> {
     return await this.get(`${this.RESOURCE}/${id}`)
+  }
+
+  async createPoll (payload: IPollContract): Promise<IApiSuccessResponse<IPoll>> {
+    return await this.post(`${this.RESOURCE}`, payload)
   }
 }
 

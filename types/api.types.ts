@@ -35,6 +35,10 @@ export interface IPoll extends ICommon {
   votes: number;
 }
 
+export interface IPollContract extends Pick<IPoll, 'question' | 'description'>{
+  options: {value: string }[];
+}
+
 export interface IVoteContract {
   poll: string;
   option: string;

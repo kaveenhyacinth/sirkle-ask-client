@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { IPoll } from '~/types/api.types'
 
-const props = defineProps<{ poll?: IPoll, selectedVote?: string }>()
+const props = defineProps<{ poll?: IPoll, selectedVote?: string, isExpired: boolean }>()
 const emits = defineEmits<{(e: 'update:selected-vote', optionId?: string): void}>()
 
 const sortedVoteOptions = computed(() => props?.poll?.options?.map(option => ({
@@ -10,6 +10,9 @@ const sortedVoteOptions = computed(() => props?.poll?.options?.map(option => ({
 }))?.sort((a, b) => b.votes - a.votes))
 
 const toPercentage = (votes: number = 0, totalVotes: number = 0): number => {
+  if (totalVotes === 0) {
+    return 0
+  }
   return Math.round((votes / totalVotes) * 100)
 }
 
@@ -25,7 +28,7 @@ const onSelectVote = (optionId: string) => {
   <div
     v-for="(option, index) in sortedVoteOptions"
     :key="option._id"
-    :class="{'result__card--max': index === 0, 'border-eire-black-600': selectedVote === option._id}"
+    :class="{'result__card--max': index === 0 && props?.poll?.votes !== 0, 'border-eire-black-600': selectedVote === option._id && !props.isExpired}"
     class="result__card"
     @click="() => onSelectVote(option._id)"
   >

@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
 import PollChart from '~/features/poll/PollChart.vue'
+
+dayjs.extend(relativeTime)
 
 const route = useRoute()
 const { onSuccess, onError } = useNotification()
@@ -11,6 +14,7 @@ const isBusy = ref({
 const silentRefresh = ref(false)
 const selectedVote = ref<string>()
 const isSubmitVoteModalOpen = ref(false)
+const isExpired = ref(false)
 
 const pollId = computed<string>(() => route.params?.poll_id as string)
 
@@ -19,6 +23,11 @@ const { data, refresh: originalRefresh, pending } = useAsyncData(`poll:${pollId}
     return
   }
   const response = await useApi().pollModule.getPollById(pollId.value)
+
+  const now = dayjs()
+  const expiresAt = dayjs(response?.data?.expiresAt)
+  isExpired.value = !expiresAt?.isAfter(now)
+
   return {
     poll: response.data
   }
@@ -26,12 +35,19 @@ const { data, refresh: originalRefresh, pending } = useAsyncData(`poll:${pollId}
   watch: [pollId]
 })
 
+const timeUntilEvent = computed(() => {
+  const now = dayjs()
+  const expiresAt = dayjs(data?.value?.poll?.expiresAt)
+  if (expiresAt?.isAfter(now)) {
+    return 'Expires in ' + expiresAt.from(now, true)
+  }
+  return 'Expired'
+})
+
 const refresh = async (...args: any[]) => {
   silentRefresh.value = true // Indicate this is a refresh, not a route change
   await originalRefresh(...args)
 }
-
-const timeAgo = useTimeAgo(new Date(data?.value?.poll?.expiresAt as string))
 
 const shouldShowSpinner = computed(() => pending.value && !silentRefresh.value)
 const submitButtonOptions = computed(() => ({
@@ -98,18 +114,18 @@ onBeforeUnmount(() => {
         </p>
       </div>
       <div class="info__card">
-        <p class="text-sm">
-          Expires {{ timeAgo }}
+        <p :class="{'text-red-500': isExpired}" class="text-sm">
+          {{ timeUntilEvent }}
         </p>
-        <p class="text-sm text-gray-500">
+        <p v-if="!isExpired" class="text-sm text-gray-500">
           ({{ formatDate(data?.poll?.expiresAt) }})
         </p>
       </div>
     </div>
 
-    <PollChart v-model:selected-vote="selectedVote" :poll="data?.poll" />
+    <PollChart v-model:selected-vote="selectedVote" :is-expired="isExpired" :poll="data?.poll" />
 
-    <div class="mt-4">
+    <div v-if="!isExpired" class="mt-4">
       <UButton
         :disabled="!selectedVote || isBusy.submitVote"
         :label="submitButtonOptions[isBusy.submitVote ? 'loadingText' : 'text']"

@@ -11,7 +11,7 @@ const handleOnToggleSidebar = () => {
 
 <template>
   <div class="flex items-center py-3 px-4 gap-4">
-    <h1 class="text-xl font-bold">
+    <h1 class="text-xl font-bold cursor-pointer" @click="navigateTo('/')">
       Sirkl<span class="text-primary">Ask</span>
     </h1>
     <button v-if="!noSidebar" @click="handleOnToggleSidebar">

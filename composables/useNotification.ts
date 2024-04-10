@@ -8,7 +8,7 @@ export const useNotification = () => {
 
   const onSuccess = (payload: Notification) => {
     toast.add({
-      title: payload.title ?? 'Success!',
+      title: payload.title,
       description: payload.description,
       color: 'green',
       timeout: 3000
@@ -17,15 +17,25 @@ export const useNotification = () => {
 
   const onError = (payload: Notification) => {
     toast.add({
-      title: payload.title ?? 'Error!',
+      title: payload.title,
       description: payload.description,
       color: 'red',
       timeout: 3000
     })
   }
 
+  const onInfo = (payload: Notification) => {
+    toast.add({
+      title: payload.title,
+      description: payload.description,
+      color: 'blue',
+      timeout: 3000
+    })
+  }
+
   return {
     onSuccess,
-    onError
+    onError,
+    onInfo
   }
 }
